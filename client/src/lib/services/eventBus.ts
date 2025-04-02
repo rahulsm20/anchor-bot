@@ -1,0 +1,16 @@
+import { EventEmitter } from "eventemitter3";
+
+export const queueEvents = new EventEmitter();
+
+export const QUEUE_EVENTS = {
+  SONG_ADDED: "SONG_ADDED",
+  SONG_REMOVED: "SONG_REMOVED",
+  QUEUE_UPDATED: "QUEUE_UPDATED",
+  CURRENT_SONG_CHANGED: "CURRENT_SONG_CHANGED",
+  SONG_ENDED: "SONG_ENDED",
+  NEXT_SONG: "NEXT_SONG",
+  CURRENT_SONG: "CURRENT_SONG",
+  ADD_SONG: "ADD_SONG",
+  FETCHED_CURRENT_SONG: "FETCHED_CURRENT_SONG",
+  ADDED_QUOTE: 'ADDED_QUOTE',
+} as const;

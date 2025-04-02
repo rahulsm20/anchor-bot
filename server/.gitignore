@@ -1,0 +1,5 @@
+node_modules
+_drizzle
+.env
+env.vars.json
+dist
