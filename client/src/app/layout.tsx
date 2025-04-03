@@ -1,5 +1,6 @@
 import Layout from "@/components/custom/Layout";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -41,6 +42,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <meta
+        name="twitter:card"
+        content="an image of the anchor bot song request page"
+      />
+      <meta name="twitter:site" content="@boringBroccoli" />
+      <meta name="twitter:creator" content="@boringBroccoli" />
+      <meta name="twitter:title" content="Anchor Bot" />
+      <meta name="twitter:description" content="a twitch bot for everyone." />
+      <meta name="twitter:image" content="/anchor-bot.png" />
+      <meta
+        name="twitter:image:alt"
+        content="A brief description of the image for accessibility."
+      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${sfPro.variable}`}
       >
@@ -48,6 +62,7 @@ export default function RootLayout({
           src="https://open.spotify.com/embed/iframe-api/v1?theme=dark"
           async
         ></script>
+        <Analytics />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
