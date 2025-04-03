@@ -5,6 +5,7 @@
 - [Architecture](#architecture)
 - [Tech stack](#tech-stack)
 - [Setting up locally](#setting-up-locally)
+- [Features](#features)
 
 ### Architecture
 
@@ -48,3 +49,13 @@
       ```
       cd server && npm run dev
       ```
+
+### Features
+
+- [x] Client-side credentials
+- [x] Ability to add custom commands
+- [ ] Song requests from multiple sources
+  - [x] Youtube
+  - [x] Spotify
+  - [ ] SoundCloud
+- [ ] Ability to restrict who can make song requests
