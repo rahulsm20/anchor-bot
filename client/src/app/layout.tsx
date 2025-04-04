@@ -24,15 +24,41 @@ const sfPro = localFont({
 
 export const metadata: Metadata = {
   title: "Anchor Bot | Home",
-  description: "A twitch bot for everyone!",
+  description: "A Twitch bot for everyone!",
   icons: [
-    {
-      url: "/anchor.svg",
-      rel: "icon",
-      type: "image/x-icon",
-      sizes: "16x16",
-    },
+    { url: "/anchor.svg", rel: "icon", type: "image/x-icon", sizes: "16x16" },
   ],
+  keywords: ["twitch", "bot", "anchor", "anchor bot", "twitch bot"],
+  openGraph: {
+    title: "Anchor Bot",
+    description: "A Twitch bot for everyone.",
+    url: "https://anchor-bot.vercel.app",
+    siteName: "Anchor Bot",
+    images: [
+      {
+        url: "https://anchor-bot.vercel.app/home.png",
+        width: 1200,
+        height: 630,
+        alt: "A Twitch bot for everyone",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    site: "@anchor-bot",
+    creator: "@boringBroccoli",
+    title: "Anchor Bot",
+    description: "A Twitch bot for everyone.",
+    images: [
+      {
+        url: "https://anchor-bot.vercel.app/home.png",
+        width: 1200,
+        height: 630,
+        alt: "A Twitch bot for everyone",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -42,24 +68,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@boringBroccoli" />
-      <meta name="twitter:creator" content="@boringBroccoli" />
-      <meta name="twitter:title" content="Anchor Bot" />
-      <meta name="twitter:description" content="a twitch bot for everyone." />
-      <meta name="twitter:image" content="/anchor-bot.png" />
-      <meta name="og:site" content="@boringBroccoli" />
-      <meta name="og:creator" content="@boringBroccoli" />
-      <meta name="og:title" content="Anchor Bot" />
-      <meta name="og:description" content="a twitch bot for everyone." />
-      <meta name="og:image" content="/anchor-bot.png" />
-      <meta name="og:image:alt" content="a twitch bot for everyone" />
-      <meta name="og:image:height" content="1200" />
-      <meta name="og:image:width" content="600" />
-      <meta
-        name="twitter:image:alt"
-        content="A brief description of the image for accessibility."
-      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${sfPro.variable}`}
       >
