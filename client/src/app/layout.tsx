@@ -42,15 +42,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <meta
-        name="twitter:card"
-        content="an image of the anchor bot song request page"
-      />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@boringBroccoli" />
       <meta name="twitter:creator" content="@boringBroccoli" />
       <meta name="twitter:title" content="Anchor Bot" />
       <meta name="twitter:description" content="a twitch bot for everyone." />
       <meta name="twitter:image" content="/anchor-bot.png" />
+      <meta name="og:site" content="@boringBroccoli" />
+      <meta name="og:creator" content="@boringBroccoli" />
+      <meta name="og:title" content="Anchor Bot" />
+      <meta name="og:description" content="a twitch bot for everyone." />
+      <meta name="og:image" content="/anchor-bot.png" />
+      <meta name="og:image:alt" content="a twitch bot for everyone" />
+      <meta name="og:image:height" content="1200" />
+      <meta name="og:image:width" content="600" />
       <meta
         name="twitter:image:alt"
         content="A brief description of the image for accessibility."
