@@ -17,6 +17,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { serverHandlers } from "@/lib/services";
+import { QUEUE_EVENTS, queueEvents } from "@/lib/services/eventBus";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader, Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -64,6 +65,7 @@ export const AddCommandForm = () => {
     setAdding(false);
     setLoading(false);
     setModalOpen(false);
+    queueEvents.emit(QUEUE_EVENTS.REFETCH_COMMANDS);
   }
 
   return (

@@ -45,7 +45,7 @@ export const useSpotifySession = () => {
         .finally(() => setFetching(false));
     };
     updateSession();
-    const intervalId = setInterval(updateSession, 180 * 1000);
+    const intervalId = setInterval(updateSession, 300 * 1000);
 
     return () => clearInterval(intervalId);
   }, []);

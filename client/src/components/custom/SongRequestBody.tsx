@@ -27,7 +27,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import Queue from "./Queue";
-import SongResourceSettings from "./SongResourceSettings";
+import SongResourceSettings from "./settings/SongResourceSettings";
 import SpotifyPlayer from "./SpotifyPlayer";
 import { Heading } from "./Tags";
 import YoutubePlayer from "./YoutubePlayer";
@@ -106,7 +106,6 @@ const SongRequestBody = () => {
         if (reason === "Login authentication failed") {
           await signOut({ callbackUrl: "/" });
         }
-        console.log("Disconnected:", reason);
       });
 
       return () => {
@@ -119,7 +118,16 @@ const SongRequestBody = () => {
       };
     };
 
-    initialIRCClient();
+    if (!isSongRequestsEnabled) {
+      if (chatServiceRef.current) {
+        chatServiceRef.current.disconnect().catch(console.error);
+        chatServiceRef.current.clearEventListeners();
+        chatServiceRef.current = null;
+      }
+      return;
+    } else {
+      initialIRCClient();
+    }
 
     return () => {
       if (chatServiceRef.current) {
@@ -128,13 +136,7 @@ const SongRequestBody = () => {
         chatServiceRef.current = null;
       }
     };
-  }, [session?.twitchAccessToken, channel]);
-
-  useEffect(() => {
-    if (isSongRequestsEnabled) {
-      //
-    }
-  }, [isSongRequestsEnabled]);
+  }, [session?.twitchAccessToken, channel, isSongRequestsEnabled]);
 
   useEffect(() => {
     if (currentVideoRef.current !== currentVideo) {
@@ -149,10 +151,6 @@ const SongRequestBody = () => {
         if (link) {
           const video = await addToQueue(link, requestedBy);
           if (video) {
-            console.log(
-              "listeners: ",
-              queueEvents.listenerCount(QUEUE_EVENTS.SONG_ADDED)
-            );
             queueEvents.emit(QUEUE_EVENTS.SONG_ADDED, {
               ...video,
             });
@@ -179,7 +177,6 @@ const SongRequestBody = () => {
   useEffect(() => {
     const handleNextSong = (data: { video: VideoQueueItem }) => {
       if (data.video.provider === SONG_PROVIDERS.SPOTIFY) {
-        console.log("handling new song: ", { data, spotifyPlayerRef });
         setIsPlaying(true);
         if (
           youtubePlayerRef &&
@@ -193,7 +190,6 @@ const SongRequestBody = () => {
           spotifyPlayerRef.current &&
           data.video.provider === SONG_PROVIDERS.SPOTIFY
         ) {
-          console.log("Loading spotify song...");
           spotifyPlayerRef.current?.loadUri(`spotify:track:${data.video.id}`);
           spotifyPlayerRef.current?.play();
         }
@@ -256,7 +252,6 @@ const SongRequestBody = () => {
                 if (position >= duration - 2000 && !isPaused) {
                   if (!queue.length) return;
 
-                  console.log("Starting next song", { queue });
                   hasPlayedNext.current = true;
                   await playNextVideo();
                 }
@@ -270,7 +265,6 @@ const SongRequestBody = () => {
       }
       // If we already have a controller, just load the new URI
       else if (currentVideo?.id && spotifyPlayerRef.current) {
-        console.log("Loading new Spotify URI:", currentVideo.id);
         spotifyPlayerRef.current.loadUri(`spotify:track:${currentVideo.id}`);
         spotifyPlayerRef.current.play();
         hasPlayedNext.current = false;
@@ -312,10 +306,6 @@ const SongRequestBody = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log("changed:", { spotifyPlayerRef });
-  }, [spotifyPlayerRef.current]);
-
   const playVideo = (video: VideoQueueItem) => {
     if (video.provider === "spotify") {
       queueEvents.emit(QUEUE_EVENTS.NEXT_SONG, { video });
@@ -330,8 +320,6 @@ const SongRequestBody = () => {
         Math.abs(e.data.position - e.data.duration) < 1000 &&
         !e.data.isPaused
       ) {
-        const queue = useQueueStore.getState().queue;
-        console.log("starting next song", { queue });
         await playNextVideo();
       }
     };
@@ -340,16 +328,12 @@ const SongRequestBody = () => {
   const playNextVideo = async () => {
     try {
       const queue = useQueueStore.getState().queue;
-      console.log({ queue });
       if (queue.length > 0) {
         const nextVideo = queue[0];
         if (nextVideo.provider === SONG_PROVIDERS.SPOTIFY) {
           if (youtubePlayerRef && youtubePlayerRef.current) {
             youtubePlayerRef.current.stopVideo();
           }
-        } else if (spotifyPlayerRef && spotifyPlayerRef.current) {
-          // spotifyPlayerRef.current.pause();
-          // console.log("pausing");
         }
 
         setCurrentVideo(nextVideo);

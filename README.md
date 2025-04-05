@@ -52,8 +52,12 @@
 
 ### Features
 
+![Landing Page](client/public/home.png)
+
+![Queue](client/public/anchor-bot.png)
+
 - [x] Ability to add custom commands
 - [x] Song requests from multiple sources
   - [x] Youtube
   - [x] Spotify
-- [ ] Ability to restrict who can make song requests
+- [x] Ability to restrict who can make song requests

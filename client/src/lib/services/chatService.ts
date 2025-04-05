@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat"; // ES 2015
 import { serverHandlers } from ".";
 import { config } from "../config";
+import { validatePermission } from "../utils";
 import { QUEUE_EVENTS, queueEvents } from "./eventBus";
 dayjs.extend(advancedFormat);
 export class ChatService {
@@ -26,10 +27,17 @@ export class ChatService {
     });
     queueEvents.on(QUEUE_EVENTS.SONG_ADDED, (data: VideoQueueItem) => {
       const { title, requested_by } = data;
-      this.client?.say(
-        this.channel,
-        `Added ${title} to the queue requested by @${requested_by}`
-      );
+      if (!title) {
+        this.client?.say(
+          this.channel,
+          `Please connect Spotify to allow users to request spotify links @${this.channel}`
+        );
+      } else {
+        this.client?.say(
+          this.channel,
+          `Added ${title} to the queue requested by @${requested_by}`
+        );
+      }
     });
 
     queueEvents.on(QUEUE_EVENTS.FETCHED_CURRENT_SONG, (currentSong, user) => {
@@ -44,7 +52,12 @@ export class ChatService {
     });
   }
 
-  async handleCommand(command: string, args: string[], user: string) {
+  async handleCommand(
+    command: string,
+    args: string[],
+    user: string,
+    badges: string
+  ) {
     const customCommands = await serverHandlers.getCommands();
     const customCommand = customCommands.find(
       (c: CommandType) => c.command === command
@@ -53,6 +66,14 @@ export class ChatService {
       this.client?.say(
         this.channel,
         parseCustomCommand(customCommand.response, user)
+      );
+      return;
+    }
+    const hasPermission = await validatePermission(command, badges);
+    if (!hasPermission) {
+      this.client?.say(
+        this.channel,
+        `You don't have permission to use this command @${user}`
       );
       return;
     }

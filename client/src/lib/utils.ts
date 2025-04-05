@@ -1,10 +1,11 @@
-import { VideoQueueItem } from "@/types";
+import { PermissionType, VideoQueueItem } from "@/types";
 import axios from "axios";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { config } from "./config";
+import { COMMAND_FEATURE_MAP_REVERSE } from "./constants";
+import { serverHandlers } from "./services";
 import { getSpotifyTrack } from "./services/spotify";
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -73,4 +74,32 @@ export async function determineLinkProvider(
     };
   }
   return newVideo;
+}
+
+export async function validatePermission(command: string, badges: string) {
+  const permissions = await serverHandlers.getPermissions();
+  const permission = permissions.find((p: PermissionType) =>
+    COMMAND_FEATURE_MAP_REVERSE[p.feature].includes(command)
+  );
+  if (!permission) return true;
+  const { authorizedPersonnel } = permission;
+  const accessLevel = getAccessLevel(badges);
+  return authorizedPersonnel === "everyone" || accessLevel == "broadcaster"
+    ? true
+    : authorizedPersonnel.includes(accessLevel);
+}
+
+export function getAccessLevel(badges: string) {
+  const badgeArray = badges.split(",");
+  let accessLevel = "viewer";
+  if (badgeArray.includes("moderator/1")) {
+    accessLevel = "mod";
+  } else if (badgeArray.includes("subscriber/1")) {
+    accessLevel = "sub";
+  } else if (badgeArray.includes("broadcaster/1")) {
+    accessLevel = "broadcaster";
+  } else if (badgeArray.includes("vip/1")) {
+    accessLevel = "vip";
+  }
+  return accessLevel;
 }

@@ -13,7 +13,6 @@ export const channelControllers = {
       await cacheData(`channel:${name}`, oauthToken);
       return res.status(200).json("updated user cache");
     } catch (error) {
-      console.log({ error });
       return res.status(500).json({ error: "Internal Server Error" });
     }
   },
@@ -97,7 +96,7 @@ export const channelControllers = {
         return res.status(400).json({ error: "Unauthenticated Request" });
       }
       const channel = req.user?.login.toLowerCase();
-      const { id } = req.query;
+      const { id } = req.params;
       if (!id || !channel) {
         return res.status(400).json({ error: "Invalid Request" });
       }
@@ -111,26 +110,41 @@ export const channelControllers = {
       return res.status(500).json({ error: "Internal Server Error" });
     }
   },
-  // updatePermissions: async (req: Request, res: Response) => {
-  //   try {
-  //     if (!req.user) {
-  //       return res.status(400).json({ error: "Unauthenticated Request" });
-  //     }
-  //     const channel = req.user?.login.toLowerCase();
-
-  //     if (!channel || !permissions) {
-  //       return res.status(400).json({ error: "Invalid Request" });
-  //     }
-  //     const result = await queries.updatePermissions({
-  //       channel,
-  //       permissions,
-  //     });
-  //     return res.status(200).json(result);
-  //   } catch (err) {
-  //     console.log(err);
-  //     return res.status(500).json({ error: "Internal Server Error" });
-  //   }
-  // }
+  addUpdatePermissions: async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        return res.status(400).json({ error: "Unauthenticated Request" });
+      }
+      const channel = req.user?.login.toLowerCase();
+      const { permissions = [] } = req.body;
+      if (!channel || !permissions) {
+        return res.status(400).json({ error: "Invalid Request" });
+      }
+      const result = await queries.addUpdatePermissions({
+        channel,
+        permissions,
+      });
+      return res.status(200).json({ result });
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+  getPermissions: async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        return res.status(400).json({ error: "Unauthenticated Request" });
+      }
+      const channel = req.user?.login.toLowerCase();
+      const permissions = await queries.getPermissions({
+        channel: channel as string,
+      });
+      return res.status(200).json(permissions);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
 };
 
 export const queueControllers = {

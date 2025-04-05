@@ -18,6 +18,7 @@ type ABSelectProps = HTMLAttributes<HTMLSelectElement> & {
   children?: React.ReactNode;
   options: SelectItemType[];
   defaultValue?: string;
+  value?: string;
   placeholder?: string;
   onChange?: (value: string) => void;
 };
@@ -25,11 +26,12 @@ const ABSelect = ({
   options,
   defaultValue,
   onChange,
+  value,
   triggerButton,
   placeholder,
 }: ABSelectProps) => {
   return (
-    <Select onValueChange={onChange} defaultValue={defaultValue}>
+    <Select onValueChange={onChange} defaultValue={defaultValue} value={value}>
       <SelectTrigger>
         {triggerButton ? (
           triggerButton

@@ -142,16 +142,25 @@ declare global {
   }
 }
 
-// global.d.ts
-import { EventEmitter } from "events";
-
-declare global {
-  const queueEvents: EventEmitter | undefined; // ✅ Use var in global.d.ts
-}
-
 export type CommandType = {
   id?: string;
   command: string;
   response: string;
   description?: string;
+};
+
+export type AccessOption =
+  | "everyone"
+  | "subscribers"
+  | "vips"
+  | "mods"
+  | "followers";
+
+export type PermissionType = {
+  feature: string;
+  authorizedPersonnel: AccessOption;
+};
+
+export type MappedPermissions = {
+  [key: string]: AccessOption;
 };

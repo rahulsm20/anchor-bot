@@ -1,4 +1,4 @@
-import { VideoQueueItem } from "@/types";
+import { PermissionType, VideoQueueItem } from "@/types";
 import axios from "axios";
 import { getSession } from "next-auth/react";
 import { config } from "../config";
@@ -42,7 +42,6 @@ export async function cacheUserData({
 
 export async function getQueueByChannel() {
   try {
-    console.log("getting queue by channel");
     const listenerClient = await client();
     const res = await listenerClient.get(`/queue`);
     return res.data;
@@ -177,6 +176,26 @@ export const serverHandlers = {
     try {
       const listenerClient = await client();
       const response = await listenerClient.delete(`/channel/commands/${id}`);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  },
+  updatePermissions: async (data: { permissions: PermissionType[] }) => {
+    try {
+      const listenerClient = await client();
+      const response = await listenerClient.post(`/channel/permissions`, data);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  },
+  getPermissions: async () => {
+    try {
+      const listenerClient = await client();
+      const response = await listenerClient.get(`/channel/permissions`);
       return response.data;
     } catch (err) {
       console.log(err);
