@@ -40,7 +40,7 @@
       cd client && npm run dev & cd server && npm run dev &
       wait
     ```
-  - Seperate terminals
+  - Separate terminals
     - Run client
       ```
       cd client && npm run dev
@@ -52,10 +52,8 @@
 
 ### Features
 
-- [x] Client-side credentials
 - [x] Ability to add custom commands
-- [ ] Song requests from multiple sources
+- [x] Song requests from multiple sources
   - [x] Youtube
   - [x] Spotify
-  - [ ] SoundCloud
 - [ ] Ability to restrict who can make song requests
