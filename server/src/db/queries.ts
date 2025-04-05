@@ -1,6 +1,7 @@
 import { and, eq } from "drizzle-orm";
+import { PermissionType } from "../../types";
 import { db } from "./index";
-import { commands, queue, queueItem, quotes } from "./schema";
+import { commands, permissions, queue, queueItem, quotes } from "./schema";
 
 export const queries = {
   getQuotesByChannel: async ({ channel }: { channel: string }) => {
@@ -62,7 +63,6 @@ export const queries = {
       const [newQueue] = await db.insert(queue).values({ channel }).returning({
         id: queue.id,
         channel: queue.channel,
-        access_option: queue.access_option,
       });
 
       existingQueue = newQueue;
@@ -198,5 +198,56 @@ export const queries = {
       .delete(commands)
       .where(and(eq(commands.id, id), eq(commands.channel, channel)))
       .returning();
+  },
+  addUpdatePermissions: async ({
+    channel,
+    permissions: newPermissions,
+  }: {
+    channel: string;
+    permissions: PermissionType[];
+  }) => {
+    if (!channel || !newPermissions) {
+      throw new Error("Please provide a channel name and permissions");
+    }
+    for (const permission of newPermissions) {
+      const { authorizedPersonnel, feature } = permission;
+      const existingPermission = await db.query.permissions.findFirst({
+        where: (permissions, { eq }) =>
+          and(
+            eq(permissions.channel, channel),
+            eq(permissions.feature, feature)
+          ),
+      });
+      if (!existingPermission) {
+        await db
+          .insert(permissions)
+          .values({ authorizedPersonnel, feature, channel })
+          .returning();
+      } else if (
+        existingPermission.authorizedPersonnel !== authorizedPersonnel
+      ) {
+        await db
+          .update(permissions)
+          .set({ authorizedPersonnel, updated_at: new Date() })
+          .where(
+            and(
+              eq(permissions.channel, channel),
+              eq(permissions.feature, feature)
+            )
+          )
+          .returning();
+      }
+    }
+    return db.query.permissions.findMany({
+      where: (permissions, { eq }) => eq(permissions.channel, channel),
+    });
+  },
+  getPermissions: async ({ channel }: { channel: string }) => {
+    if (!channel) {
+      throw new Error("Please provide a channel name");
+    }
+    return db.query.permissions.findMany({
+      where: (permissions, { eq }) => eq(permissions.channel, channel),
+    });
   },
 };

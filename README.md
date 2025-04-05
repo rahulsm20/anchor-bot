@@ -52,6 +52,8 @@
 
 ### Features
 
+![Landing Page]()
+
 - [x] Ability to add custom commands
 - [x] Song requests from multiple sources
   - [x] Youtube

@@ -7,8 +7,24 @@ import {
 } from "@/components/ui/accordion";
 import { FAQPage } from "@/utils/page";
 
-// Move data to a separate constant
 const FAQ_DATA = [
+  {
+    question: "How do I connect my Spotify account?",
+    answer: (
+      <div>
+        <p className="text-muted-foreground">
+          To connect your Spotify account, click on the &quot;Connect
+          Spotify&quot; button in the settings page. You will be redirected to{" "}
+          Spotify&apos;s login page, where you can log in and authorize our app
+          to access your Spotify data.
+        </p>
+        <p className="text-muted-foreground">
+          Once you have authorized the app, you will be redirected back to our
+          app, and your Spotify account will be connected.
+        </p>
+      </div>
+    ),
+  },
   {
     question: "Why should I trust you with my Twitch and Spotify credentials?",
     answer:
@@ -27,17 +43,21 @@ const QuestionAndAnswer = ({
   index,
 }: {
   question: string;
-  answer: string;
+  answer: string | React.ReactNode;
   index: number;
 }) => (
   <AccordionItem value={`item-${index}`}>
     <AccordionTrigger>{question}</AccordionTrigger>
     <AccordionContent className="flex flex-col gap-2">
-      {answer.split("\n").map((line, i) => (
-        <p key={i} className="text-muted-foreground">
-          {line}
-        </p>
-      ))}
+      {typeof answer == "string" ? (
+        answer.split("\n").map((line, i) => (
+          <p key={i} className="text-muted-foreground">
+            {line}
+          </p>
+        ))
+      ) : (
+        <div className="text-muted-foreground">{answer}</div>
+      )}
     </AccordionContent>
   </AccordionItem>
 );
