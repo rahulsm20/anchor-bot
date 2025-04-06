@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getCommandsByChannel, serverHandlers } from "@/lib/services";
+import { QUEUE_EVENTS, queueEvents } from "@/lib/services/eventBus";
 import { Edit, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -69,9 +70,20 @@ const CommandBody = () => {
       }
     }
   };
+
   useEffect(() => {
     fetchCommands();
   }, [channel]);
+
+  useEffect(() => {
+    const handleRefetchCommands = () => {
+      fetchCommands();
+    };
+    queueEvents.on(QUEUE_EVENTS.REFETCH_COMMANDS, handleRefetchCommands);
+    return () => {
+      queueEvents.off(QUEUE_EVENTS.REFETCH_COMMANDS, handleRefetchCommands);
+    };
+  }, []);
 
   return (
     <>

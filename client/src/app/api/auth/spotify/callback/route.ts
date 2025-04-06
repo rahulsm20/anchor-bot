@@ -29,7 +29,7 @@ const handler = async (req: NextRequest) => {
     return NextResponse.redirect(new URL("/error", req.url));
   }
 
-  const redirectUrl = new URL("/queue", req.url);
+  const redirectUrl = new URL("/song-requests", req.url);
   const redirectResponse = NextResponse.redirect(redirectUrl);
 
   redirectResponse.cookies.set("spotify_access_token", data.access_token, {

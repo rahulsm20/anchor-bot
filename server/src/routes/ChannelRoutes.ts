@@ -6,7 +6,9 @@ const router = express.Router();
 router.post("/", channelControllers.addUpdateChannel);
 router.get("/commands", channelControllers.getCommandsForChannel);
 router.post("/commands", channelControllers.addCommandForChannel);
-router.delete("/commands", channelControllers.deleteCommandForChannel);
+router.post("/permissions", channelControllers.addUpdatePermissions);
+router.get("/permissions", channelControllers.getPermissions);
+router.delete("/commands/:id", channelControllers.deleteCommandForChannel);
 router.get("/quotes", channelControllers.getQuotesForChannel);
 router.post("/quotes", channelControllers.addQuotesForChannel);
 

@@ -1,3 +1,5 @@
+import { AccessOption } from "@/types";
+
 export const constants = {
   TWITCH_CLIENT_ID: process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID || "",
   TWITCH_CLIENT_SECRET: process.env.NEXT_PUBLIC_TWITCH_CLIENT_SECRET || "",
@@ -48,7 +50,7 @@ export const ACCESS_OPTIONS = [
   { value: "followers", label: "Followers" },
 ];
 
-export const ACCESS_OPTIONS_MAP = {
+export const ACCESS_OPTIONS_MAP: { [key: string]: AccessOption } = {
   EVERYONE: "everyone",
   SUBSCRIBERS: "subscribers",
   VIPS: "vips",
@@ -61,4 +63,21 @@ export const SONG_PROVIDERS = {
   SPOTIFY: "spotify",
   SOUNDCLOUD: "soundcloud",
   LOCAL: "local",
+};
+
+export const FEATURE_ACCESS_LABELS = [
+  {
+    label: "Who can request songs?",
+    key: "song-request",
+  },
+];
+
+export const COMMAND_FEATURE_MAP = {
+  "!sr": "song-request",
+  "!skip": "song-request",
+  "!remove": "song-request",
+};
+
+export const COMMAND_FEATURE_MAP_REVERSE: { [key: string]: string[] } = {
+  "song-request": ["!sr", "!skip", "!remove"],
 };

@@ -4,7 +4,6 @@ import {
   integer,
   pgEnum,
   pgTable,
-  serial,
   timestamp,
   uuid,
   varchar,
@@ -34,7 +33,6 @@ export const queue = pgTable(
   {
     id: uuid().primaryKey().defaultRandom(),
     channel: varchar("channel").unique().notNull(),
-    access_option: AccessOptionEnum().default("everyone"),
   },
   (table) => [index("channel_idx").on(table.channel)]
 );
@@ -63,7 +61,7 @@ export const commands = pgTable(
 export const quotes = pgTable(
   "quotes",
   {
-    id: serial().primaryKey(),
+    id: uuid().primaryKey().defaultRandom(),
     quote: varchar("quote").notNull(),
     channel: varchar("channel").notNull(),
     created_at: timestamp("created_at").notNull().defaultNow(),
@@ -74,3 +72,26 @@ export const quotes = pgTable(
   },
   (table) => [index("channel_quote_idx").on(table.channel, table.quote)]
 );
+
+export const permissions = pgTable(
+  "permissions",
+  {
+    id: uuid().primaryKey().defaultRandom(),
+    feature: varchar("feature").notNull(),
+    authorizedPersonnel: AccessOptionEnum("authorized_personnel").notNull(),
+    channel: varchar("channel").notNull(),
+    created_at: timestamp("created_at").notNull().defaultNow(),
+    updated_at: timestamp()
+      .notNull()
+      .default(sql`(CURRENT_TIMESTAMP)`)
+      .$onUpdate(() => sql`(CURRENT_TIMESTAMP)`),
+  },
+  (table) => [index("channel_permission_idx").on(table.channel, table.feature)]
+);
+
+export const permissionRelations = relations(permissions, ({ one }) => ({
+  channel: one(queue, {
+    fields: [permissions.channel],
+    references: [queue.id],
+  }),
+}));

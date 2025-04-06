@@ -3,7 +3,8 @@ export async function getSpotifyTrack(id: string): Promise<string> {
   const song = await res.json();
   if (song) {
     if (song.error) {
-      throw new Error("Please ensure you're connected to Spotify");
+      // throw new Error("Please ensure you're connected to Spotify");
+      return "";
     }
     const artist = song.artists
       .map((artist: { name: string }) => artist.name)
