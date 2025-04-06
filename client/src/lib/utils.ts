@@ -90,15 +90,19 @@ export async function validatePermission(command: string, badges: string) {
 }
 
 export function getAccessLevel(badges: string) {
-  const badgeArray = badges.split(",");
+  if (!badges) return "viewer";
+  const rawBadges = badges
+    .split(",")
+    .map((badge) => badge.split("/")[0])
+    .join(",");
   let accessLevel = "viewer";
-  if (badgeArray.includes("moderator/1")) {
+  if (rawBadges.includes("moderator")) {
     accessLevel = "mod";
-  } else if (badgeArray.includes("subscriber/1")) {
+  } else if (rawBadges.includes("subscriber")) {
     accessLevel = "sub";
-  } else if (badgeArray.includes("broadcaster/1")) {
+  } else if (rawBadges.includes("broadcaster")) {
     accessLevel = "broadcaster";
-  } else if (badgeArray.includes("vip/1")) {
+  } else if (rawBadges.includes("vip")) {
     accessLevel = "vip";
   }
   return accessLevel;
