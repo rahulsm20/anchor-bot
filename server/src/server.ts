@@ -2,6 +2,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
 import { authMiddleware } from "./middleware/auth";
+import { rateLimiter } from "./middleware/rate-limiter";
 import { ChannelRoutes } from "./routes/ChannelRoutes";
 import { QueueRoutes } from "./routes/QueueRoutes";
 import { SpotifyRoutes } from "./routes/SpotifyRoutes";
@@ -29,15 +30,14 @@ const router = express.Router();
 router.use("/channel", ChannelRoutes);
 router.use("/queue", QueueRoutes);
 router.use("/spotify", SpotifyRoutes);
-app.get("/", async (_req: Request, res: Response) => {
+router.get("/", async (_req: Request, res: Response) => {
   return res.status(200).json({ message: "Service running", status: "ok" });
 });
-
-app.use("/api", authMiddleware, router);
-
-app.get("*", async (_req: Request, res: Response) => {
+router.get("*", async (_req: Request, res: Response) => {
   return res.status(404).json("Invalid route");
 });
+
+app.use("/api", authMiddleware, rateLimiter, router);
 
 app.listen(port, () => {
   console.log(`Server is running at port ${port}`);

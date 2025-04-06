@@ -9,7 +9,7 @@ export const authMiddleware = async (
   try {
     const sessionToken = req.headers.authorization?.split(" ")[1];
     if (!sessionToken) {
-      throw new Error("Please provide a session token");
+      throw new Error("Unauthorized: No token provided");
     }
     const verified = await verifyTwitchToken(sessionToken);
     if (verified) {

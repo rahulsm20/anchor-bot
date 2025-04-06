@@ -6,10 +6,11 @@
 - [Tech stack](#tech-stack)
 - [Setting up locally](#setting-up-locally)
 - [Features](#features)
+- [Screenshots](#screenshots)
 
 ### Architecture
 
-![Image of architecture](client/public/arch3.png)
+![Image of architecture](client/public/updated.png)
 
 ### Tech Stack
 
@@ -52,12 +53,14 @@
 
 ### Features
 
-![Landing Page](client/public/home.png)
-
-![Queue](client/public/anchor-bot.png)
-
 - [x] Ability to add custom commands
 - [x] Song requests from multiple sources
   - [x] Youtube
   - [x] Spotify
-- [x] Ability to restrict who can make song requests
+- [x] Ability to restrict who can use a command
+
+### Screenshots
+
+![Landing Page](client/public/home.png)
+
+![Queue](client/public/anchor-bot.png)
