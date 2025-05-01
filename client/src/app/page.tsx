@@ -43,7 +43,7 @@ export default function Home() {
         <h1 className="text-5xl">Anchor Bot</h1>
         <p>A twitch bot for everyone! </p>
       </section>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:grid-cols-3 animate-accordion-up">
+      <section className="grid grid-cols-1 sm:grid-cols-2 gap-10 lg:grid-cols-3 animate-accordion-up">
         {features.map((feature, index) => (
           <Card
             key={index}

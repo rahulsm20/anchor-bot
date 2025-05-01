@@ -5,7 +5,7 @@ const Footer = () => {
     {
       name: "Github",
       icon: <GithubIcon />,
-      url: "https://github.com/rahulsm20/broccoli-bot",
+      url: "https://github.com/rahulsm20/anchor-bot",
     },
     {
       name: "Twitter",

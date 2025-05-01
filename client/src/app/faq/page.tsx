@@ -28,12 +28,12 @@ const FAQ_DATA = [
   {
     question: "Why should I trust you with my Twitch and Spotify credentials?",
     answer:
-      "You shouldn't. :) \nJust kidding, we don't store your credentials.",
+      "You shouldn't. :) \nAll your credentials are stored on your browser.",
   },
   {
-    question: "Why do I need to connect my spotify?",
+    question: "Why do I need to connect my Spotify?",
     answer:
-      "You need to connect your spotify account to be able to fetch music data from Spotify.",
+      "You need to connect your Spotify account to be able to fetch music data from Spotify.",
   },
 ] as const;
 
