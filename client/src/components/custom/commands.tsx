@@ -19,7 +19,7 @@ import {
 import { serverHandlers } from "@/lib/services";
 import { QUEUE_EVENTS, queueEvents } from "@/lib/services/eventBus";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -34,6 +34,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import LoaderSpin from "./Loader-Spin";
 
 // --------------------------------------------
 export const AddCommandForm = () => {
@@ -143,7 +144,7 @@ export const AddCommandForm = () => {
               )}
             />
             <Button type="submit" disabled={loading || adding}>
-              {loading || adding ? <Loader className="animate-spin" /> : "Add"}
+              {loading || adding ? <LoaderSpin loading /> : "Add"}
             </Button>
           </form>
         </Form>

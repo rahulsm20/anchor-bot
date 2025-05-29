@@ -1,7 +1,7 @@
 "use client";
 import QueueTable from "@/components/custom/QueueTable";
 import { Heading } from "@/components/custom/Tags";
-import { getQueueByChannel } from "@/lib/services";
+import { getPublicQueueByChannel } from "@/lib/services";
 import { VideoQueueItem } from "@/types";
 import { useEffect, useState } from "react";
 
@@ -16,7 +16,17 @@ const PublicQueueRoute = ({ params }: PageProps) => {
   const [loading, setLoading] = useState(false);
   const fetchData = async () => {
     setLoading(true);
-    const res = await getQueueByChannel();
+    if (!channel) {
+      console.error("Channel parameter is missing");
+      setLoading(false);
+      return;
+    }
+    const res = await getPublicQueueByChannel(channel);
+    for (const item of res.items) {
+      if (item.requested_by == "system") {
+        item.requested_by = channel;
+      }
+    }
     setQueue(res.items);
     setLoading(false);
   };

@@ -1,9 +1,10 @@
 import { SongRequestPage } from "@/utils/page";
-import { LoaderCircle, PersonStanding, Twitch } from "lucide-react";
+import { PersonStanding, Twitch } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../ui/button";
+import LoaderSpin from "./Loader-Spin";
 
 const TwitchLogin = () => {
   const { data, status } = useSession();
@@ -21,7 +22,7 @@ const TwitchLogin = () => {
   return (
     <li>
       {status === "loading" ? (
-        <LoaderCircle className="animate-spin h-4 w-4" />
+        <LoaderSpin loading />
       ) : data?.twitchAccessToken ? (
         <div className="flex items-center gap-2">
           {userImage ? (
@@ -36,17 +37,13 @@ const TwitchLogin = () => {
             <PersonStanding />
           )}
           <Button onClick={disconnectTwitch}>
-            {loading ? <LoaderCircle className="animate-spin h-4 w-4" /> : null}
+            {loading ? <LoaderSpin loading /> : null}
             Logout
           </Button>
         </div>
       ) : (
-        <Button onClick={connectTwitch} className="rounded-full">
-          {loading ? (
-            <LoaderCircle className="animate-spin h-4 w-4" />
-          ) : (
-            <Twitch />
-          )}
+        <Button onClick={connectTwitch} className="border-0">
+          {loading ? <LoaderSpin loading /> : <Twitch />}
           Login
         </Button>
       )}

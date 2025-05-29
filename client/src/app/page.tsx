@@ -47,7 +47,7 @@ export default function Home() {
         {features.map((feature, index) => (
           <Card
             key={index}
-            className="flex flex-col  w-60 p-4 backdrop-blur-md"
+            className="flex flex-col w-60 p-4 backdrop-blur-md border-foreground/20"
           >
             <CardHeader>
               <CardTitle>{feature.title}</CardTitle>

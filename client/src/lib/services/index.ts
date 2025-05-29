@@ -203,3 +203,16 @@ export const serverHandlers = {
     }
   },
 };
+
+export const getPublicQueueByChannel = async (
+  channel: string
+): Promise<{ items: VideoQueueItem[] }> => {
+  try {
+    const listenerClient = await client();
+    const res = await listenerClient.get(`/public/queue/${channel}`);
+    return res.data;
+  } catch (err) {
+    console.error("Error fetching public queue:", err);
+    throw err;
+  }
+};

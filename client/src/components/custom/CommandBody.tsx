@@ -87,7 +87,9 @@ const CommandBody = () => {
 
   return (
     <>
-      <p>List of commands you can use to interact with the bot in the chat.</p>
+      <p>
+        List of commands you can use to interact with the bot from your chat.
+      </p>
       {loading ? (
         <LoaderSpin loading={loading} />
       ) : (

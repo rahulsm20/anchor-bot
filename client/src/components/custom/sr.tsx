@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { VideoQueueItem } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -21,6 +21,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import LoaderSpin from "./Loader-Spin";
 
 export const AddVideoForm = ({
   onAdd,
@@ -100,8 +101,12 @@ export const AddVideoForm = ({
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={loading || adding}>
-              {loading || adding ? <Loader className="animate-spin" /> : "Add"}
+            <Button
+              type="submit"
+              disabled={loading || adding}
+              className="bg-primary"
+            >
+              {loading || adding ? <LoaderSpin loading /> : "Add"}
             </Button>
           </form>
         </Form>

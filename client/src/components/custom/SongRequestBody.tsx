@@ -288,7 +288,7 @@ const SongRequestBody = () => {
     // Only destroy the player when the component unmounts
     return () => {
       if (controller) {
-        controller.removeListener("playback_update", () => { });
+        controller.removeListener("playback_update", () => {});
       }
     };
   }, [currentVideo, theme]);
@@ -405,7 +405,8 @@ const SongRequestBody = () => {
                 </TooltipTrigger>
                 <TooltipContent className="bg-background text-foreground border">
                   <p>
-                    Users can only request songs as long as you have this page open.
+                    Users can only request songs as long as you have this page
+                    open.
                   </p>
                 </TooltipContent>
               </Tooltip>

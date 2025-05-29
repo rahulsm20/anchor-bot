@@ -32,6 +32,7 @@ const Queue = ({ isPlaying, skipVideo, controlPlayback }: QueueProps) => {
           <div className="flex gap-2">
             <AddVideoForm onAdd={addToQueue} loading={loading} />
             <Button
+              variant={"ghost"}
               onClick={skipVideo}
               disabled={queue.length === 0}
               title="Skip"
@@ -39,6 +40,7 @@ const Queue = ({ isPlaying, skipVideo, controlPlayback }: QueueProps) => {
               <ChevronRight />
             </Button>
             <Button
+              variant={"ghost"}
               onClick={controlPlayback}
               disabled={!currentVideo}
               title={`${isPlaying ? "Pause" : "Play"}`}

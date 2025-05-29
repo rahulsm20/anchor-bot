@@ -1,6 +1,7 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { Request, Response } from "express";
+import { queueControllers } from "./controllers";
 import { authMiddleware } from "./middleware/auth";
 import { rateLimiter } from "./middleware/rate-limiter";
 import { ChannelRoutes } from "./routes/ChannelRoutes";
@@ -26,7 +27,9 @@ app.use(express.json());
 app.use(cors({ origin: config.CLIENT_URL, credentials: true }));
 
 const router = express.Router();
+const publicRouter = express.Router();
 
+// Authenticated routes
 router.use("/channel", ChannelRoutes);
 router.use("/queue", QueueRoutes);
 router.use("/spotify", SpotifyRoutes);
@@ -37,6 +40,10 @@ router.get("*", async (_req: Request, res: Response) => {
   return res.status(404).json("Invalid route");
 });
 
+// Public routes
+publicRouter.get("/queue/:channel", queueControllers.getQueueByChannel);
+
+app.use("/api/public", rateLimiter, publicRouter);
 app.use("/api", authMiddleware, rateLimiter, router);
 
 app.listen(port, () => {
