@@ -21,7 +21,7 @@ const Navbar = () => {
   const pathname = usePathname();
   const isAuthenticated = status == "authenticated";
   return (
-    <ul className="flex items-center justify-center p-4 gap-5 backdrop-blur-lg sticky w-full z-20 top-0 text-xs bg-background/60 border-b">
+    <ul className="flex items-center justify-center p-4 gap-5 backdrop-blur-lg sticky w-full z-20 top-0 text-xs bg-background/60 border-b border-b-zinc-400 dark:border-b-zinc-900">
       <li className="hidden md:block">
         <Anchor />
       </li>

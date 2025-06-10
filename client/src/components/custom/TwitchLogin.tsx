@@ -36,13 +36,16 @@ const TwitchLogin = () => {
           ) : (
             <PersonStanding />
           )}
-          <Button onClick={disconnectTwitch}>
+          <Button onClick={disconnectTwitch} className="text-white">
             {loading ? <LoaderSpin loading /> : null}
             Logout
           </Button>
         </div>
       ) : (
-        <Button onClick={connectTwitch} className="border-0">
+        <Button
+          onClick={connectTwitch}
+          className="border-0 text-white hover:bg-primary/80"
+        >
           {loading ? <LoaderSpin loading /> : <Twitch />}
           Login
         </Button>

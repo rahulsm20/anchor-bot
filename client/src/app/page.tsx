@@ -6,7 +6,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { BookOpen, Command, Glasses, Play, PlusCircle } from "lucide-react";
+import {
+  BookOpen,
+  Command,
+  Computer,
+  Glasses,
+  Play,
+  PlusCircle,
+} from "lucide-react";
 
 export default function Home() {
   const features = [
@@ -34,6 +41,11 @@ export default function Home() {
       title: "Customizable",
       description: "Customize the bot to fit your needs.",
       icon: <PlusCircle />,
+    },
+    {
+      title: "Easy to Use",
+      description: "Simple and intuitive user interface.",
+      icon: <Computer />,
     },
   ];
 
