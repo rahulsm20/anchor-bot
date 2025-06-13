@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
+  Anchor,
   BookOpen,
   Command,
   Computer,
@@ -50,10 +51,13 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col items-start justify-center gap-5">
-      <section>
-        <h1 className="text-5xl">Anchor Bot</h1>
-        <p>A twitch bot for everyone! </p>
+    <div className="flex flex-col items-center justify-center gap-5 w-1/2">
+      <section className="flex flex-col items-start justify-start w-full">
+        <div className="flex items-center justify-center gap-2">
+          <Anchor className="text-foreground" />
+          <h1 className="text-5xl">Anchor Bot</h1>
+        </div>
+        <p className="ml-8">A twitch bot for everyone! </p>
       </section>
       <section className="grid grid-cols-1 sm:grid-cols-2 gap-10 lg:grid-cols-3 animate-accordion-up">
         {features.map((feature, index) => (
