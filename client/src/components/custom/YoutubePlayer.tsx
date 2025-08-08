@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { useQueueStore } from "@/hooks/QueueProvider";
 import { YoutubePlayerProps, YTPlayerEvent } from "@/types";
+import { LoaderEllipsis } from "./Loader-Spin";
 
 const YoutubePlayer = ({
   youtubePlayerRef,
@@ -118,9 +119,8 @@ const YoutubePlayer = ({
       {playerContainerRef ? (
         <div>
           <div
-            className={`flex-col gap-2 p-2 ${
-              currentVideo?.provider == "youtube" ? "flex" : "hidden"
-            }`}
+            className={`flex-col gap-2 p-2 ${currentVideo?.provider == "youtube" ? "flex" : "hidden"
+              }`}
           >
             <div ref={playerContainerRef} />
           </div>
