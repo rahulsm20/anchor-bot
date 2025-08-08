@@ -16,6 +16,8 @@ import {
   PlusCircle,
 } from "lucide-react";
 
+//----------------------------------------------------------------------
+
 export default function Home() {
   const features = [
     {
@@ -59,11 +61,11 @@ export default function Home() {
         </div>
         <p className="ml-8">A twitch bot for everyone! </p>
       </section>
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-10 lg:grid-cols-3 animate-accordion-up">
+      <section className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:grid-cols-3 animate-accordion-up">
         {features.map((feature, index) => (
           <Card
             key={index}
-            className="flex flex-col w-60 p-4 backdrop-blur-md border-foreground/20"
+            className="flex flex-col w-full p-4 backdrop-blur-md border-foreground/20 hover:z-50"
           >
             <CardHeader>
               <CardTitle>{feature.title}</CardTitle>
@@ -78,3 +80,5 @@ export default function Home() {
     </div>
   );
 }
+
+//----------------------------------------------------------------------

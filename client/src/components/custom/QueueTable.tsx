@@ -177,7 +177,7 @@ const columns: ({
 //         {loading && (
 //           <TableRow>
 //             <TableCell colSpan={3} className="h-24 text-center">
-//               <LoaderSpin loading={loading} />
+//               <LoaderEllipsis loading={loading} />
 //             </TableCell>
 //           </TableRow>
 //         )}

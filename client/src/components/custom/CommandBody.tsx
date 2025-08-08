@@ -13,7 +13,7 @@ import { Edit, Trash } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import LoaderSpin from "./Loader-Spin";
+import { LoaderEllipsis } from "./Loader-Spin";
 
 // --------------------------------------------
 
@@ -91,7 +91,7 @@ const CommandBody = () => {
         List of commands you can use to interact with the bot from your chat.
       </p>
       {loading ? (
-        <LoaderSpin loading={loading} />
+        <LoaderEllipsis loading={loading} />
       ) : (
         <Table>
           <TableHeader>

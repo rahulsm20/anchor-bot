@@ -4,7 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import LoaderSpin from "./Loader-Spin";
+import { LoaderEllipsis } from "./Loader-Spin";
 
 const TwitchLogin = () => {
   const { data, status } = useSession();
@@ -22,7 +22,7 @@ const TwitchLogin = () => {
   return (
     <li>
       {status === "loading" ? (
-        <LoaderSpin loading />
+        <LoaderEllipsis loading />
       ) : data?.twitchAccessToken ? (
         <div className="flex items-center gap-2">
           {userImage ? (
@@ -37,7 +37,7 @@ const TwitchLogin = () => {
             <PersonStanding />
           )}
           <Button onClick={disconnectTwitch} className="text-white">
-            {loading ? <LoaderSpin loading /> : null}
+            {loading ? <LoaderEllipsis loading /> : null}
             Logout
           </Button>
         </div>
@@ -46,7 +46,7 @@ const TwitchLogin = () => {
           onClick={connectTwitch}
           className="border-0 text-white hover:bg-primary/80"
         >
-          {loading ? <LoaderSpin loading /> : <Twitch />}
+          {loading ? <LoaderEllipsis loading /> : <Twitch />}
           Login
         </Button>
       )}

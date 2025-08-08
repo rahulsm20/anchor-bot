@@ -34,7 +34,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import LoaderSpin from "./Loader-Spin";
+import { LoaderEllipsis } from "./Loader-Spin";
 
 // --------------------------------------------
 export const AddCommandForm = () => {
@@ -144,7 +144,7 @@ export const AddCommandForm = () => {
               )}
             />
             <Button type="submit" disabled={loading || adding}>
-              {loading || adding ? <LoaderSpin loading /> : "Add"}
+              {loading || adding ? <LoaderEllipsis loading /> : "Add"}
             </Button>
           </form>
         </Form>

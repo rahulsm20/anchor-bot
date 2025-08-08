@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 
 import { useQueueStore } from "@/hooks/QueueProvider";
 import { YoutubePlayerProps, YTPlayerEvent } from "@/types";
-import LoaderSpin from "./Loader-Spin";
 
 const YoutubePlayer = ({
   youtubePlayerRef,
@@ -127,7 +126,7 @@ const YoutubePlayer = ({
           </div>
         </div>
       ) : (
-        <LoaderSpin loading />
+        <LoaderEllipsis loading />
       )}
     </div>
   );

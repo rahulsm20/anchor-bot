@@ -25,7 +25,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { VideoQueueItem } from "@/types";
-import LoaderSpin from "../custom/Loader-Spin";
+import { LoaderEllipsis } from "../custom/Loader-Spin";
 
 export function DataTable({
   data = [],
@@ -129,7 +129,7 @@ export function DataTable({
             {loading ? (
               <TableRow>
                 <TableCell colSpan={columns.length}>
-                  <LoaderSpin loading className="p-2" />
+                  <LoaderEllipsis loading className="p-2" />
                 </TableCell>
               </TableRow>
             ) : table.getRowModel().rows?.length ? (

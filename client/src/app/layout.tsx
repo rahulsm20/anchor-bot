@@ -1,5 +1,6 @@
 import Layout from "@/components/custom/Layout";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -82,7 +83,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Layout>{children}</Layout>
+          <Layout>
+            {children}
+            <Toaster />
+          </Layout>
         </ThemeProvider>
       </body>
     </html>

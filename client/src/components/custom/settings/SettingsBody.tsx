@@ -1,6 +1,5 @@
 "use client";
 import ABSelect from "@/components/custom/input/ABSelect";
-import LoaderSpin from "@/components/custom/Loader-Spin";
 import SpotifyLogin from "@/components/custom/SpotifyLogin";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +21,7 @@ import { serverHandlers } from "@/lib/services";
 import { AccessOption, MappedPermissions, PermissionType } from "@/types";
 import { Check, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { LoaderEllipsis } from "../Loader-Spin";
 
 const SettingsBody = () => {
   const [loading, setLoading] = useState(false);
@@ -88,7 +88,7 @@ const SettingsBody = () => {
           <div className="grid grid-cols-2 justify-center items-center gap-2">
             <p>{`Who's allowed to request songs?`}</p>
             {loading ? (
-              <LoaderSpin loading={loading} />
+              <LoaderEllipsis loading={loading} />
             ) : (
               FEATURE_ACCESS_LABELS.map((feature) => (
                 <ABSelect
@@ -136,7 +136,7 @@ const InfoTable = () => {
         {fetching ? (
           <TableRow>
             <TableCell colSpan={3} className="h-24 text-center">
-              <LoaderSpin loading={fetching} />
+              <LoaderEllipsis loading={fetching} />
             </TableCell>
           </TableRow>
         ) : (

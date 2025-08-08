@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import LoaderSpin from "./Loader-Spin";
+import { LoaderEllipsis } from "./Loader-Spin";
 
 export const AddVideoForm = ({
   onAdd,
@@ -106,7 +106,7 @@ export const AddVideoForm = ({
               disabled={loading || adding}
               className="bg-primary"
             >
-              {loading || adding ? <LoaderSpin loading /> : "Add"}
+              {loading || adding ? <LoaderEllipsis loading /> : "Add"}
             </Button>
           </form>
         </Form>
