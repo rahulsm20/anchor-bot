@@ -25,12 +25,13 @@ type SpotifySession = {
 };
 export const useSpotifySession = () => {
   const [session, setSession] = useState<SpotifySession | null>(null);
-  const [fetching, setFetching] = useState(true);
+  const [fetching, setFetching] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errorSent, setErrorSent] = useState(false);
   const { toast } = useToast();
 
   const fetchSession = async () => {
+    setFetching(true)
     try {
       console.log("sending");
       const response = await fetch("/api/auth/spotify/session");

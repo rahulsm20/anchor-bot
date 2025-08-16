@@ -71,9 +71,11 @@ const SettingsBody = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     fetchPermissions();
   }, []);
+
   return (
     <div>
       <Tabs defaultValue="general">
@@ -82,7 +84,7 @@ const SettingsBody = () => {
           <TabsTrigger value="access">Access</TabsTrigger>
         </TabsList>
         <TabsContent value="general">
-          <InfoTable />
+          <InfoTable loading={loading} />
         </TabsContent>
         <TabsContent value="access">
           <div className="grid grid-cols-2 justify-center items-center gap-2">
@@ -121,7 +123,7 @@ const SettingsBody = () => {
   );
 };
 
-const InfoTable = () => {
+const InfoTable = ({ loading }: { loading: boolean }) => {
   const { fetching, isAuthenticated } = useSpotifySession();
   return (
     <Table>
@@ -133,10 +135,10 @@ const InfoTable = () => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {fetching ? (
+        {loading || fetching ? (
           <TableRow>
             <TableCell colSpan={3} className="h-24 text-center">
-              <LoaderEllipsis loading={fetching} />
+              <LoaderEllipsis loading={loading || fetching} />
             </TableCell>
           </TableRow>
         ) : (
