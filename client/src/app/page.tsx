@@ -53,7 +53,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center gap-5 w-1/2">
+    <div className="flex flex-col items-center justify-center gap-5 w-2/3">
       <section className="flex flex-col items-start justify-start w-full">
         <div className="flex items-center justify-center gap-2">
           <Anchor className="text-foreground" />
