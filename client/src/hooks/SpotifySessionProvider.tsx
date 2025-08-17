@@ -1,28 +1,7 @@
 import { useEffect, useState } from "react";
 import { useToast } from "./use-toast";
+import { SpotifySession } from "@/types";
 
-type SpotifySession = {
-  display_name: string;
-  email: string;
-  external_urls: {
-    spotify: string;
-  };
-  followers: {
-    href: string;
-    total: number;
-  };
-  href: string;
-  id: string;
-  images: [
-    {
-      height: number;
-      url: string;
-      width: number;
-    }
-  ];
-  type: string;
-  uri: string;
-};
 export const useSpotifySession = () => {
   const [session, setSession] = useState<SpotifySession | null>(null);
   const [fetching, setFetching] = useState(false);
@@ -31,9 +10,8 @@ export const useSpotifySession = () => {
   const { toast } = useToast();
 
   const fetchSession = async () => {
-    setFetching(true)
+    setFetching(true);
     try {
-      console.log("sending");
       const response = await fetch("/api/auth/spotify/session");
       const session = await response.json();
       if (!session.error) {
@@ -41,7 +19,7 @@ export const useSpotifySession = () => {
         setIsAuthenticated(true);
       }
     } catch (err) {
-      console.log(err, "hi");
+      console.log(err);
       if (!errorSent) {
         toast({
           title: "Please connect to Spotify",
@@ -55,9 +33,7 @@ export const useSpotifySession = () => {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(fetchSession, 300 * 1000);
-
-    return () => clearInterval(intervalId);
+    fetchSession();
   }, []);
 
   return { session, fetching, isAuthenticated };

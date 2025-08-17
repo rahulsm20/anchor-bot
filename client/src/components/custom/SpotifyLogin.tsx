@@ -1,14 +1,22 @@
 "use client";
-import { useSpotifySession } from "@/hooks/SpotifySessionProvider";
 import { LoaderCircle } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
+import { SpotifySession } from "@/types";
 
-const SpotifyLogin = () => {
-  const { session, fetching, isAuthenticated } = useSpotifySession();
+type SpotifyLoginProps = {
+  session: SpotifySession | null;
+  fetching: boolean;
+  isAuthenticated: boolean;
+};
+
+const SpotifyLogin = ({
+  session,
+  fetching,
+  isAuthenticated,
+}: SpotifyLoginProps) => {
   const router = useRouter();
-
   return (
     <Button
       title={session?.email ? "Connected to Spotify" : "Connect Spotify"}

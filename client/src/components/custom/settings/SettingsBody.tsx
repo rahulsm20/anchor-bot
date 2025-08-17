@@ -26,6 +26,7 @@ import { LoaderEllipsis } from "../Loader-Spin";
 const SettingsBody = () => {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState<MappedPermissions>({});
+
   const fetchPermissions = async () => {
     setLoading(true);
     try {
@@ -45,6 +46,7 @@ const SettingsBody = () => {
       setLoading(false);
     }
   };
+
   const updatePermissions = async () => {
     setLoading(true);
     try {
@@ -84,7 +86,7 @@ const SettingsBody = () => {
           <TabsTrigger value="access">Access</TabsTrigger>
         </TabsList>
         <TabsContent value="general">
-          <InfoTable loading={loading} />
+          <InfoTable />
         </TabsContent>
         <TabsContent value="access">
           <div className="grid grid-cols-2 justify-center items-center gap-2">
@@ -123,8 +125,8 @@ const SettingsBody = () => {
   );
 };
 
-const InfoTable = ({ loading }: { loading: boolean }) => {
-  const { fetching, isAuthenticated } = useSpotifySession();
+const InfoTable = () => {
+  const { fetching, session, isAuthenticated } = useSpotifySession();
   return (
     <Table>
       <TableHeader>
@@ -135,17 +137,23 @@ const InfoTable = ({ loading }: { loading: boolean }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {loading || fetching ? (
+        {fetching ? (
           <TableRow>
             <TableCell colSpan={3} className="h-24 text-center">
-              <LoaderEllipsis loading={loading || fetching} />
+              <LoaderEllipsis loading={fetching} />
             </TableCell>
           </TableRow>
         ) : (
           <>
             <TableRow>
               <TableCell>Spotify</TableCell>
-              <TableCell title="Spotify is currently enabled">
+              <TableCell
+                title={
+                  isAuthenticated
+                    ? "Spotify is currently enabled"
+                    : "Spotify is currently disabled"
+                }
+              >
                 {isAuthenticated ? (
                   <Check className="text-green-600" />
                 ) : (
@@ -153,7 +161,11 @@ const InfoTable = ({ loading }: { loading: boolean }) => {
                 )}
               </TableCell>
               <TableCell>
-                <SpotifyLogin />
+                <SpotifyLogin
+                  session={session}
+                  fetching={fetching}
+                  isAuthenticated={isAuthenticated}
+                />
               </TableCell>
             </TableRow>
             <TableRow>
