@@ -8,7 +8,7 @@ export const config = {
   SPOTIFY_REDIRECT_URI: process.env.SPOTIFY_REDIRECT_URI || "",
   NODE_ENV: process.env.NODE_ENV || "development",
   YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY || "",
-  CLIENT_URL: process.env.CLIENT_URL || "",
+  CLIENT_URL: process.env.NEXT_PUBLIC_CLIENT_URL || "",
   JWT_SINGING_KEY: process.env.JWT_SINGING_KEY || "",
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET || "",
   BASE_URL: process.env.BASE_URL || "http://localhost:3000",
