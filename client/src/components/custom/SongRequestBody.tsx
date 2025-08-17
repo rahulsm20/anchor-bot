@@ -218,6 +218,7 @@ const SongRequestBody = () => {
       queueEvents.off(QUEUE_EVENTS.NEXT_SONG, handleNextSong);
     };
   }, []);
+
   useEffect(() => {
     let controller: SpotifyEmbedController;
 

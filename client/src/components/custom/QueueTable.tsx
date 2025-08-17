@@ -47,11 +47,11 @@ const columns: ({
 }) => {
   const columns: ColumnDef<VideoQueueItem>[] = [
     {
-      id: "index",
+      id: "position",
       header: "#",
-      accessorKey: "index",
+      accessorKey: "position",
       cell: ({ row }) => {
-        return <span>{row.getValue("index")}</span>;
+        return <span>{row.getValue("position")}</span>;
       },
     },
     {
@@ -93,20 +93,23 @@ const columns: ({
           <div className="flex justify-center items-center space-x-2">
             <Button
               onClick={() => removeFromQueue(row.index, false)}
-              className="bg-red-600 p-2 hover:bg-red-700 border-none"
+              variant={"ghost"}
+              className="p-2 hover:bg-red-500 border-none"
             >
               <Trash />
             </Button>
             <Button
               onClick={() => moveUpInQueue(row.index)}
-              className="p-2"
+              className="p-2 hover:bg-primary"
+              variant={"ghost"}
               disabled={row.index === 0}
             >
               <ChevronUp />
             </Button>
             <Button
+              variant={"ghost"}
               onClick={() => moveToTop(row.index)}
-              className="p-2"
+              className="p-2 hover:bg-primary"
               disabled={row.index === 0}
             >
               <ChevronsUp />

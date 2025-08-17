@@ -1,8 +1,8 @@
 export const SongRequestPage = () => ({
   metadata: {
-    title: "Anchor Bot | Song Requests",
-    label: "Song Requests",
-    description: "song requests queue",
+    title: "Anchor Bot | Media Requests",
+    label: "Media Requests",
+    description: "media requests queue",
     href: "/song-requests",
   },
 });

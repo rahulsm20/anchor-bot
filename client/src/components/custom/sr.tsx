@@ -73,7 +73,7 @@ export const AddVideoForm = ({
   return (
     <Dialog open={modalOpen} onOpenChange={setModalOpen}>
       <DialogTrigger asChild>
-        <Button title="Add Video">
+        <Button variant={"ghost"} title="Add Video">
           <Plus />
         </Button>
       </DialogTrigger>

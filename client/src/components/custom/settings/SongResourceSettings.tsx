@@ -10,7 +10,7 @@ const SongResourceSettings = () => {
       title="Settings"
       className="h-96 flex flex-col gap-5"
       triggerButton={
-        <Button>
+        <Button variant={"ghost"}>
           <Settings />
         </Button>
       }
