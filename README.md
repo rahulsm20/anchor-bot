@@ -11,9 +11,14 @@ Anchor Bot is a full-stack application that connects to Twitch chat, interprets 
 - **Frontend**: Next.js, Zustand, NextAuth
 - **Backend**: Node.js, Express, DrizzleORM
 - **Database**: PostgreSQL
-- **Caching**: Redis
-- **Auth**: NextAuth (OAuth with Twitch)
-- **Infra**: Docker (Docker Compose)
+- **Rate Limiting**: Redis
+- **Auth**: NextAuth (OAuth with Twitch) + Spotify
+- **Infra**
+  - Frontend
+    - Vercel
+  - Backend
+    - GCP Cloud Run
+    - Docker
 - **Languages**: TypeScript
 
 ## 🧱 Architecture
@@ -30,13 +35,13 @@ Anchor Bot is a full-stack application that connects to Twitch chat, interprets 
 - ✅ **Custom Twitch Commands**  
   Create and manage your own commands directly from the frontend UI.
 
-- ✅ **Real-time Song Requests**
+- ✅ **Real-time Media Requests**
 
   - 🎵 Supports **YouTube** and **Spotify**
   - 🔎 Accepts links from Twitch chat
 
 - ✅ **Role-Based Access Control**  
-  Limit command usage to subs, mods, or specific users.
+  Limit command usage to subs, mods, followers or VIPs.
 
 - ✅ **Responsive Frontend Dashboard**  
   Monitor queue, playback state, and manage song flow live.
@@ -48,7 +53,13 @@ Set up environment variables as described in:
 - [`client/.env.example`](client/.env.example)
 - [`server/.env.example`](server/.env.example)
 
-### 🔁 Start with Docker (recommended)
+#### 🧰 Use the provided script (recommended)
+
+```bash
+./start.sh
+```
+
+## 🔁 Start with Docker
 
 ```bash
 docker compose up --build
@@ -59,10 +70,4 @@ docker compose up --build
 ```bash
 cd client && npm run dev & cd server && npm run dev &
 wait
-```
-
-### 🧰 Or use the provided script
-
-```bash
-./start.sh
 ```
