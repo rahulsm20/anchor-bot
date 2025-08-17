@@ -65,7 +65,7 @@ export default function Home() {
         {features.map((feature, index) => (
           <Card
             key={index}
-            className="flex flex-col w-full p-4 backdrop-blur-md border-foreground/20 hover:z-50"
+            className="flex flex-col w-full p-4 backdrop-blur-md border-foreground/20"
           >
             <CardHeader>
               <CardTitle>{feature.title}</CardTitle>
