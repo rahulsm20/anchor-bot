@@ -1,21 +1,8 @@
 import { Request, Response } from "express";
 import { queries } from "../db/queries";
-import { cacheData } from "../lib/redis";
 import { getSongDetails } from "../lib/twitch";
 import { determineLinkProvider } from "../utils";
 export const channelControllers = {
-  addUpdateChannel: async (req: Request, res: Response) => {
-    try {
-      const { name, oauthToken } = req.body;
-      if (!name || !oauthToken) {
-        return res.status(400).json({ error: "Invalid Request" });
-      }
-      await cacheData(`channel:${name}`, oauthToken);
-      return res.status(200).json("updated user cache");
-    } catch (error) {
-      return res.status(500).json({ error: "Internal Server Error" });
-    }
-  },
   getCommandsForChannel: async (req: Request, res: Response) => {
     try {
       if (!req.user) {

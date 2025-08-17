@@ -3,7 +3,6 @@ import { channelControllers } from "../controllers";
 
 const router = express.Router();
 
-router.post("/", channelControllers.addUpdateChannel);
 router.get("/commands", channelControllers.getCommandsForChannel);
 router.post("/commands", channelControllers.addCommandForChannel);
 router.post("/permissions", channelControllers.addUpdatePermissions);
