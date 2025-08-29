@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useToast } from "./use-toast";
 import { SpotifySession } from "@/types";
+import { useSession } from "next-auth/react";
 
 export const useSpotifySession = () => {
   const [session, setSession] = useState<SpotifySession | null>(null);
@@ -8,7 +9,7 @@ export const useSpotifySession = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errorSent, setErrorSent] = useState(false);
   const { toast } = useToast();
-
+  const { data: sessionData } = useSession();
   const fetchSession = async () => {
     setFetching(true);
     try {
@@ -33,7 +34,9 @@ export const useSpotifySession = () => {
   };
 
   useEffect(() => {
-    fetchSession();
+    if (sessionData) {
+      fetchSession();
+    }
   }, []);
 
   return { session, fetching, isAuthenticated };
