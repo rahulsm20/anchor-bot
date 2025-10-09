@@ -91,16 +91,26 @@ export const useQueueStore = create<QueueState>((set, get) => {
           provider: "youtube",
         };
       } else if (spotifyTrackId) {
-        title = await getSpotifyTrack(spotifyTrackId);
+        const { name: title, id } = await getSpotifyTrack(spotifyTrackId[1]);
         newVideo = {
-          id: spotifyTrackId,
+          id: spotifyTrackId[1],
           title,
-          song_id: "",
+          song_id: id || "",
           requested_by,
           provider: "spotify",
         };
       } else {
-        return;
+        const { name: title, id } = await getSpotifyTrack(link, false);
+        if (!title) {
+          return;
+        }
+        newVideo = {
+          id: id || link,
+          title,
+          song_id: id || "",
+          requested_by,
+          provider: "spotify",
+        };
       }
 
       const added = await serverHandlers.addToQueue({

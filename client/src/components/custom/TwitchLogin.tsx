@@ -36,7 +36,11 @@ const TwitchLogin = () => {
           ) : (
             <PersonStanding />
           )}
-          <Button onClick={disconnectTwitch} className="text-white">
+          <Button
+            onClick={disconnectTwitch}
+            className="text-white"
+            disabled={loading}
+          >
             {loading ? <LoaderEllipsis loading /> : null}
             Logout
           </Button>
@@ -44,6 +48,7 @@ const TwitchLogin = () => {
       ) : (
         <Button
           onClick={connectTwitch}
+          disabled={loading}
           className="border-0 text-white hover:bg-primary/80"
         >
           {loading ? <LoaderEllipsis loading /> : <Twitch />}

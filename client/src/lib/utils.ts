@@ -64,11 +64,23 @@ export async function determineLinkProvider(
     };
   }
   if (spotifyTrackId) {
-    title = await getSpotifyTrack(spotifyTrackId[1]);
+    const { name: title, id } = await getSpotifyTrack(spotifyTrackId[1]);
     newVideo = {
       id: spotifyTrackId[1],
       title,
-      song_id: "",
+      song_id: id || "",
+      requested_by,
+      provider: "spotify",
+    };
+  } else {
+    const { name: title, id } = await getSpotifyTrack(link, false);
+    if (!title) {
+      return null;
+    }
+    newVideo = {
+      id: id || link,
+      title,
+      song_id: id || "",
       requested_by,
       provider: "spotify",
     };
