@@ -71,7 +71,7 @@ const SongRequestBody = () => {
         description: "You need to connect to Spotify to play spotify songs.",
       });
     }
-  }, [spotifySession]);
+  }, [spotifySession?.email]);
 
   useEffect(() => {
     const initialIRCClient = async () => {

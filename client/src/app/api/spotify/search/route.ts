@@ -17,7 +17,6 @@ export async function GET(req: NextRequest) {
         },
       }
     );
-    console.log({ r: response.data.tracks.items });
     return NextResponse.json(response.data);
   } catch (error) {
     return NextResponse.json(
