@@ -80,7 +80,11 @@ export const useQueueStore = create<QueueState>((set, get) => {
 
       let title = "";
       let newVideo: VideoQueueItem;
-
+      console.log({
+        youtubeVideoId,
+        spotifyTrackId,
+        link: spotifyTrackId?.[1],
+      });
       if (youtubeVideoId) {
         title = await getYoutubeVideoTitle(youtubeVideoId);
         newVideo = {
@@ -91,9 +95,9 @@ export const useQueueStore = create<QueueState>((set, get) => {
           provider: "youtube",
         };
       } else if (spotifyTrackId) {
-        const { name: title, id } = await getSpotifyTrack(spotifyTrackId[1]);
+        const { name: title, id } = await getSpotifyTrack(spotifyTrackId, true);
         newVideo = {
-          id: spotifyTrackId[1],
+          id: spotifyTrackId,
           title,
           song_id: id || "",
           requested_by,

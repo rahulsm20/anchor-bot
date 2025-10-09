@@ -26,6 +26,12 @@ export const determineLinkProvider = async (link: string) => {
       const title = await getYoutubeVideoTitle(youtubeId);
       return { provider: "youtube", id: youtubeId, title };
     }
+  } else {
+    const { name: title, id } = await getSongDetails({
+      query: link,
+      provider: "spotify",
+    });
+    return { provider: "spotify", id, title };
   }
   return null;
 };

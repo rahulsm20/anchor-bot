@@ -8,7 +8,7 @@ const SongResourceSettings = () => {
   return (
     <Modal
       title="Settings"
-      className="h-96 flex flex-col gap-5"
+      className="h-96 flex flex-col gap-5 border border-foreground/10"
       triggerButton={
         <Button variant={"ghost"}>
           <Settings />

@@ -79,7 +79,7 @@ export class ChatService {
     }
     switch (command) {
       case "!sr":
-        const link = args[0];
+        const link = args.join(" ");
         const requestedBy = user;
         queueEvents.emit(QUEUE_EVENTS.ADD_SONG, { link, requestedBy });
         break;
