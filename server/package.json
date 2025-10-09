@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "build": "tsc && npx drizzle-kit generate",
+    "build": "tsc && npx drizzle-kit generate && echo '>> Compiled successfully'",
     "start": "node dist/src/server.js",
     "migrate": "npx drizzle-kit push",
     "deploy": "npx drizzle-kit generate && npx drizzle-kit push"
