@@ -419,11 +419,11 @@ const SongRequestBody = () => {
         </div>
         <div className="flex items-center space-x-2">
           <Switch
-            id="toggle-song-requests"
+            id="toggle-media-requests"
             checked={isSongRequestsEnabled}
             onCheckedChange={setIsSongRequestsEnabled}
           />
-          <Label htmlFor="toggle-song-requests">
+          <Label htmlFor="toggle-media-requests">
             {isSongRequestsEnabled ? "Enabled" : "Disabled"}
           </Label>
         </div>

@@ -3,7 +3,7 @@ export const SongRequestPage = () => ({
     title: "Anchor Bot | Media Requests",
     label: "Media Requests",
     description: "media requests queue",
-    href: "/song-requests",
+    href: "/media-requests",
   },
 });
 

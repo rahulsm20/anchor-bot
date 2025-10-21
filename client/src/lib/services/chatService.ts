@@ -114,7 +114,7 @@ export class ChatService {
       case "!queue":
         this.client?.say(
           this.channel,
-          `You can find the queue here: ${config.CLIENT_URL}/song-requests/${this.channel} @${user}`
+          `You can find the queue here: ${config.CLIENT_URL}/media-requests/${this.channel} @${user}`
         );
         break;
     }
