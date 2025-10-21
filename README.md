@@ -2,11 +2,11 @@
 
 > A real-time Twitch bot that lets stream viewers request songs via chat — with support for YouTube and Spotify, a live queue, and customizable chat commands. Designed for streamers to automate music interaction and maintain control over their stream’s vibe.
 
-## 🔍 Overview
+## Overview
 
 Anchor Bot is a full-stack application that connects to Twitch chat, interprets song commands from viewers, and manages a real-time playback queue. It’s split into a TypeScript-powered Next.js frontend and a Node.js backend, with PostgreSQL for storage and Redis for caching and rate limiting.
 
-## 📦 Tech Stack
+## Tech Stack
 
 - **Frontend**: Next.js, Zustand, NextAuth
 - **Backend**: Node.js, Express, DrizzleORM
@@ -21,7 +21,7 @@ Anchor Bot is a full-stack application that connects to Twitch chat, interprets 
     - Docker
 - **Languages**: TypeScript
 
-## 🧱 Architecture
+## Architecture
 
 ![Architecture Diagram](client/public/updated.png)
 
@@ -30,42 +30,43 @@ Anchor Bot is a full-stack application that connects to Twitch chat, interprets 
 - The frontend provides real-time updates of the queue, user access management, and UI for adding/removing commands.
 - Songs are fetched using YouTube and Spotify APIs and synced to a single playback queue.
 
-## 🚀 Features
+## Features
 
-- ✅ **Custom Twitch Commands**  
+- **Custom Twitch Commands**  
   Create and manage your own commands directly from the frontend UI.
 
-- ✅ **Real-time Media Requests**
+- **Real-time Media Requests**
 
-  - 🎵 Supports **YouTube** and **Spotify**
-  - 🔎 Accepts links from Twitch chat
+  - Supports **YouTube** and **Spotify**
+    - Accepts links from Twitch chat
+    - Accepts language based search
 
-- ✅ **Role-Based Access Control**  
+- **Role-Based Access Control**  
   Limit command usage to subs, mods, followers or VIPs.
 
-- ✅ **Responsive Frontend Dashboard**  
+- **Responsive Frontend Dashboard**  
   Monitor queue, playback state, and manage song flow live.
 
-## ⚙️ Local Setup
+## Local Setup
 
 Set up environment variables as described in:
 
 - [`client/.env.example`](client/.env.example)
 - [`server/.env.example`](server/.env.example)
 
-#### 🧰 Use the provided script (recommended)
+#### Use the provided script (recommended)
 
 ```bash
 ./start.sh
 ```
 
-## 🔁 Start with Docker
+## Start with Docker
 
 ```bash
 docker compose up --build
 ```
 
-### 🧪 Start manually (with npm)
+### Start manually (with npm)
 
 ```bash
 cd client && npm run dev & cd server && npm run dev &
