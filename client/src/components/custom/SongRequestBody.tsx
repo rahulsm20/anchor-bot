@@ -77,12 +77,8 @@ const SongRequestBody = () => {
     const initialIRCClient = async () => {
       if (!channel || !session?.twitchAccessToken) return;
 
-      if (chatServiceRef.current) {
-        console.log("Client already exists, skipping initialization.");
-        return;
-      }
+      if (chatServiceRef.current) return;
 
-      console.log("Generating new client...");
       const client = new tmi.Client({
         options: { debug: config.NODE_ENV === "development" },
         channels: [channel],
@@ -258,12 +254,12 @@ const SongRequestBody = () => {
                   hasPlayedNext.current = true;
                   await playNextVideo();
                 }
-              }
+              },
             );
 
             spotifyPlayerRef.current = controller;
             spotifyPlayerRef.current.play();
-          }
+          },
         );
       }
       // If we already have a controller, just load the new URI

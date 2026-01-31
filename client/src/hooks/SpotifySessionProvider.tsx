@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
-import { useToast } from "./use-toast";
 import { SpotifySession } from "@/types";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useToast } from "./use-toast";
 
+/**
+ * Hook to manage Spotify session state.
+ * @returns
+ */
 export const useSpotifySession = () => {
   const [session, setSession] = useState<SpotifySession | null>(null);
   const [fetching, setFetching] = useState(false);
