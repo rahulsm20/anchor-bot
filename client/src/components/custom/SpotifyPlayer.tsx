@@ -16,7 +16,7 @@ const SpotifyPlayer = ({
     <div
       className={`${
         !currentVideo || currentVideo?.provider == "spotify" ? "flex" : "hidden"
-      } h-16 md:h-20 lg:h-24 w-full justify-center items-center rounded-md overflow-hidden`}
+      } max-h-28 w-full justify-center items-center rounded-md overflow-hidden`}
     >
       <div ref={containerRef} className="spotify-embed" />
     </div>

@@ -393,8 +393,8 @@ const SongRequestBody = () => {
 
   return (
     <div className="grid grid-cols-1 gap-10 px-10 relative">
-      <div className="col-span-1 flex flex-col gap-2">
-        <div className="flex gap-2 justify-between">
+      <div className="col-span-1 flex flex-col gap-5">
+        <div className="flex gap-2 justify-between border-b pb-1 border-zinc-200 dark:border-zinc-700">
           <Heading className="flex items-center gap-2">
             <span>Song Requests</span>
             <TooltipProvider delayDuration={100}>

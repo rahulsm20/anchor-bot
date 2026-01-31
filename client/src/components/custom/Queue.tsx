@@ -27,7 +27,7 @@ const Queue = ({ isPlaying, skipVideo, controlPlayback }: QueueProps) => {
   return (
     <div className="queue-container flex flex-col gap-2">
       <div className="flex flex-col gap-2">
-        <Heading className="flex justify-between items-center">
+        <Heading className="flex justify-between items-center border-b pb-1 border-zinc-200 dark:border-zinc-700">
           <span>Queue</span>
           <div className="flex gap-2">
             <AddVideoForm onAdd={addToQueue} loading={loading} />
