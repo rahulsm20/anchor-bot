@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 
 export default function Error({
   error,
@@ -8,10 +7,14 @@ export default function Error({
 }: {
   error: Error & { digest?: string };
   reset: () => void;
+  retry: () => void;
 }) {
+  const message =
+    error instanceof Error ? error.message : "Something went wrong";
+
   return (
     <div>
-      <h2>Something went wrong! {error.message}</h2>
+      <h2>{message}</h2>
       <button onClick={() => reset()}>Try again</button>
     </div>
   );
